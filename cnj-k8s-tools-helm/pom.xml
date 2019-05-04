@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <artifactId>cnj-k8s-tools</artifactId>
-        <groupId>hm.edu.cs.fwp.cloud.tools</groupId>
+        <groupId>edu.hm.cs.fwp.cloud.tools</groupId>
         <version>0.7.5</version>
     </parent>
     <artifactId>cnj-k8s-tools-helm</artifactId>

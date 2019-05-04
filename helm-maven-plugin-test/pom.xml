@@ -1,8 +1,44 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>hm.edu.cs.fwp.cloud.tools</groupId>
+    <parent>
+        <groupId>edu.hm.cs.fwp.cloud.tools</groupId>
+        <artifactId>cnj-k8s-tools</artifactId>
+        <version>0.7.5</version>
+    </parent>
+    <groupId>edu.hm.cs.fwp.cloud.tools</groupId>
     <artifactId>helm-maven-plugin-test</artifactId>
-    <version>0.7.5</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
+    <build>
+        <plugins>
+            <plugin>
+            <groupId>edu.hm.cs.fwp.cloud.tools</groupId>
+                <artifactId>helm-maven-plugin</artifactId>
+                <version>${project.version}</version>
+                <executions>
+                    <execution>
+                        <id>helm-install</id>
+                        <phase>pre-integration-test</phase>
+                        <goals>
+                            <goal>install</goal>
+                        </goals>
+                        <configuration>
+                            <helmChartDirectory>${project.basedir}/src/main/helm/testok</helmChartDirectory>
+                            <helmReleaseName>helm-maven-plugin-test</helmReleaseName>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>helm-delete</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>delete</goal>
+                        </goals>
+                        <configuration>
+                            <helmReleaseName>helm-maven-plugin-test</helmReleaseName>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>

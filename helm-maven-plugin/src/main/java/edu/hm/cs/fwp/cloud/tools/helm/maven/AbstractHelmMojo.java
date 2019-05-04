@@ -25,22 +25,14 @@ public abstract class AbstractHelmMojo extends AbstractMojo {
 	@Parameter(defaultValue = "${project.build.directory}", readonly = true, required=false)
 	protected File target;
 
-	@Parameter( property = "encoding", defaultValue = "${project.build.sourceEncoding}" )
-	protected String encoding;
-
-	@Parameter( property = "artefactName", defaultValue = "${project.build.finalName}", readonly=true, required=false)
-	protected String artefactName;
-
 	@Parameter(defaultValue="${project}",required=true, readonly=true)
 	protected MavenProject project;
 
 	@Parameter( defaultValue = "${session}", required = true, readonly = true )
 	protected MavenSession session;
 
-	@Parameter(property = "helmReleaseName", readonly = true, required=false)
+	@Parameter(property = "helm.releaseName", readonly = true, required=false)
 	protected String helmReleaseName;
-
-	protected File helmChartDir;
 
 	protected void info(String msg){
 		getLog().info(msg);
