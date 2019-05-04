@@ -1,4 +1,7 @@
 package edu.hm.cs.fwp.cloud.tools.helm.core.command;
 
-public class DeleteCommandResult {
+/**
+ * Represents the result of a {@code helm delete} command.
+ */
+public final class DeleteCommandResult {
 }

@@ -3,5 +3,5 @@ package edu.hm.cs.fwp.cloud.tools.helm.core.command;
 /**
  * Represents the result of a {@code helm install} command.
  */
-public final class InstallCommandResult extends AbstractCommandResult {
+public final class UpgradeCommandResult extends AbstractCommandResult {
 }

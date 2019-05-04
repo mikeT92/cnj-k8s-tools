@@ -7,8 +7,7 @@ import org.junit.Test;
 
 import java.io.File;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class InstallCommandTest {
 
@@ -38,10 +37,10 @@ public class InstallCommandTest {
         underTest.setNamespace("default");
         currentReleaseName = "testok";
         underTest.setReleaseName("testok");
-        underTest.setVerify(true);
         underTest.setWait(true);
         underTest.setChartDirectory(new File("src/test/helm/testok"));
         InstallCommandResult result = underTest.call();
         assertNotNull("command must return non-null result", result);
+        assertEquals("command status code must be SUCCESS", CommandStatusCode.SUCCESS, result.getStatusCode());
     }
 }

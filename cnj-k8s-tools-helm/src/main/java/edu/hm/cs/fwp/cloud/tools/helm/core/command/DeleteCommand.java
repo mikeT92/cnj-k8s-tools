@@ -7,7 +7,10 @@ import java.net.URL;
 import java.util.*;
 import java.util.function.Consumer;
 
-public class DeleteCommand extends AbstractCommand<DeleteCommandResult> {
+/**
+ * Represents a {@code helm delete} command which deletes the given release.
+ */
+public final class DeleteCommand extends AbstractCommand<DeleteCommandResult> {
 
     private String description;
     private boolean dryRun;

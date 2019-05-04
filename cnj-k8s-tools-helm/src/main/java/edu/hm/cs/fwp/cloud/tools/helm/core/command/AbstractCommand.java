@@ -11,6 +11,10 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.Callable;
 
+/**
+ * Abstract base class for all helm command classes that encapsulates some common behaviour.
+ * @param <V> concrete helm command subclass
+ */
 public abstract class AbstractCommand<V> implements Callable<V> {
 
     protected Logger logger = LoggerFactory.getLogger(getClass());

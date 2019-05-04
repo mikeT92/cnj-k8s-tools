@@ -13,7 +13,10 @@ import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.function.Consumer;
 
-public class ListCommand extends AbstractCommand<ListCommandResult> {
+/**
+ * Represents the {@code helm ls} command which lists all installed releases.
+ */
+public final class ListCommand extends AbstractCommand<ListCommandResult> {
 
     private String tillerNamespace;
 
