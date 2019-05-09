@@ -177,9 +177,10 @@ public final class InstallCommand extends AbstractChartCommand<InstallCommandRes
                     statusMessageParts.add(s);
                 } else if (s.startsWith("ROLLING BACK")) {
                     statusMessageParts.add(s);
-                } else if (s.startsWith("Error:")) {
+                } */ else if (s.startsWith("Error:")) {
+                    statusCode = CommandStatusCode.FAILURE;
                     statusMessageParts.add(s);
-                } */
+                }
             }
         }
     }

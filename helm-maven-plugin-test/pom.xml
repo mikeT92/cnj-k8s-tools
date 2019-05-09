@@ -25,6 +25,7 @@
                         <configuration>
                             <helmChartDirectory>${project.basedir}/src/main/helm/testok</helmChartDirectory>
                             <helmReleaseName>helm-maven-plugin-test</helmReleaseName>
+                            <helmNamespace>default</helmNamespace>
                         </configuration>
                     </execution>
                     <execution>

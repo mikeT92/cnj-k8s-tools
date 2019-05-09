@@ -4,18 +4,25 @@
  */
 package edu.hm.cs.fwp.cloud.tools.helm.maven;
 
+import edu.hm.cs.fwp.cloud.tools.helm.core.command.CommandStatusCode;
 import edu.hm.cs.fwp.cloud.tools.helm.core.command.InstallCommand;
 import edu.hm.cs.fwp.cloud.tools.helm.core.command.InstallCommandResult;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
+
+import java.io.File;
 
 /**
  * {@code Mojo} that installs the specified chart.
  */
 @Mojo(name = "install", requiresProject = true)
 public final class InstallChartMojo extends AbstractHelmChartMojo {
+
+	@Parameter(property = "helm.namespace", required = false, readonly = true)
+	private String helmNamespace;
 
 	/**
 	 * @see org.apache.maven.plugin.Mojo#execute()
@@ -27,11 +34,21 @@ public final class InstallChartMojo extends AbstractHelmChartMojo {
 		install.setReleaseName(helmReleaseName);
 		install.setAtomic(true);
 		install.setWait(true);
+		if (this.helmNamespace != null) {
+			install.setNamespace(this.helmNamespace);
+		} else {
+			warn("No Kubernetes namespace specified, will install on default namespace of current kubectl context!");
+		}
+		InstallCommandResult result = null;
 		try {
-			InstallCommandResult installResult = install.call();
+			result = install.call();
 		} catch (Exception ex) {
 			throw new MojoExecutionException(String.format("Failed to install helm release %s", helmReleaseName), ex);
 		}
-
+		if (CommandStatusCode.FAILURE.equals(result.getStatusCode())) {
+			String msg = String.format("Failed to install release [%s]: %s %s", helmReleaseName, result.getStatusCode(), result.getStatusMessage());
+			error(msg);
+			throw new MojoExecutionException(msg);
+		}
 	}
 }

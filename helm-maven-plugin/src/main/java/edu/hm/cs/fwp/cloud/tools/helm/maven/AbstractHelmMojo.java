@@ -38,6 +38,8 @@ public abstract class AbstractHelmMojo extends AbstractMojo {
 		getLog().info(msg);
 	}
 
+	protected void warn(String msg) { getLog().warn(msg); }
+
 	protected void error(String msg){
 		getLog().error(msg);
 	}
